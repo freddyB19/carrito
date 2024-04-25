@@ -1,0 +1,109 @@
+{% extends "base/base.html" %}
+
+{% load humanize %}
+
+{% load static %}
+
+{% block title %} Pedidos {% endblock title %}
+
+{% block content %}
+
+{% if  pedidos %}
+	<h1 class="display-6 text-center mt-4">Lista de pedidos</h1>
+
+	<div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
+		<div class="list-group">
+		  	{% for pedido in pedidos %}
+			    <a href="{{  pedido.get_absolute_url }}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+			      <div class="d-flex gap-2 w-100 justify-content-between">
+			        <div>
+			          <h6 class="mb-0">Pedido realizado</h6>
+			          	<small class="d-block text-body-secondary">
+			          	<svg class="bi me-1" width="1em" height="1em"><use xlink:href="#calendar-event"/></svg>
+			          		{{pedido.creado|date:"l, d F"}}
+			          	</small>
+			        </div>
+			        <small class="opacity-50 text-nowrap">{{pedido.creado| naturaltime}}</small>
+			      </div>
+			    </a>
+		    {% endfor %}
+		</div>
+	</div>
+
+	{% if pedidos.object_list %}
+		<div class="d-flex align-items-center justify-content-center">
+	        <nav aria-label="Another pagination example">
+	          <ul class="pagination pagination-lg flex-wrap">
+	          	{% if pedidos.has_previous %}
+		            <li class="page-item">
+		              <a class="page-link" href="?page={{ pedidos.previous_page_number }}">Previous</a>
+		            </li>
+		            <li class="page-item">
+	          			<a class="page-link" href="?page=1"> 1 </a>
+	          		</li>
+	            {% endif %}
+	            
+	            {% if pedidos.has_other_pages %}
+	            	<li class="page-item active" aria-current="page">
+	              		<a class="page-link" href="?page={{ pedidos.number }}">{{ pedidos.number }}</a>
+	            	</li>
+	            {% endif %}
+	            
+	            
+	            
+	            
+	            {% if pedidos.has_next %}
+		            <li class="page-item">
+			            <a class="page-link" href="?page={{ pedidos.paginator.num_pages }}"> {{ pedidos.paginator.num_pages }}</a>
+			        </li>
+		            <li class="page-item">
+		              <a class="page-link" href="?page={{ pedidos.next_page_number }}">Next</a>
+		            </li>
+		            
+	            {% endif %}
+	          </ul>
+	        </nav>
+    	</div>
+    	{% comment %}
+    		
+    	
+		{% if pedidos.has_previous %}
+	        <a href="?page=1">&laquo; first</a>
+	        <a href="?page={{ pedidos.previous_page_number }}">previous</a>
+	    {% endif %}
+
+	    <span class="current">
+	        Page {{ pedidos.number }} of {{ pedidos.paginator.num_pages }}.
+	    </span>
+
+	    {% if pedidos.has_next %}
+	        <a href="?page={{ pedidos.next_page_number }}">next</a>
+	        <a href="?page={{ pedidos.paginator.num_pages }}">last &raquo;</a>
+		{% endif %}
+		{% endcomment %}
+		
+	{% endif %}
+
+	
+	{% else %}
+	<h1 class="display-6 text-center mt-4">Sin pedidos...</h1>
+	<div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
+	  	<div class="list-group">
+		    <a href="{% url 'home:index' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+		      <img src="{% static 'img/images.jpeg' %}" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+		      <div class="d-flex gap-2 w-100 justify-content-between">
+		        <div>
+		          <h6 class="mb-0">Usted no ha realizado algún pedido aún</h6>
+		          <p class="mb-0 opacity-75">para realizarlo vaya al: Catalago de productos.</p>
+		        </div>
+		      </div>
+		    </a>
+	  	</div>
+	</div>
+	
+{% endif %}
+
+
+
+
+{% endblock content %}

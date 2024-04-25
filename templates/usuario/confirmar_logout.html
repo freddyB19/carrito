@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+
+
+{% block title %} ¿Salir? {% endblock title %}
+
+{% block content %}
+
+<div class="container my-5">
+  <div class="p-5 text-center bg-body-tertiary rounded-3">
+    <h1 class="text-body-emphasis">¿Estas seguro que deseas salir?</h1>
+    <p class="lead">
+      Tienes productos en tu carrito de compras. Si sales, perderas esta información.
+    </p>
+
+
+
+    <div class="row text-center justify-content-center mt-4">
+    	<div class="col-sm-4">
+    		<form method="POST" action="{% url 'usuarios:confirmar-logout' %}"> {% csrf_token %}
+				<button type="submit" class="w-100 btn btn-danger btn-lg">Sí, deseo salir.</button>
+			</form>
+    	</div>
+    	<div class="col-sm-4">
+    		<a href="{% url 'home:index' %}" class="w-100 btn btn-primary btn-lg"> No, quiero continuar.</a>
+    	</div>
+
+    	
+		
+    </div>
+  </div>
+</div>
+	
+{% endblock content %}

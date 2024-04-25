@@ -1,0 +1,111 @@
+[
+	{
+		"model": "home.producto",
+		"pk" : 1,
+		"fields": {
+			"nombre": "consola de videojuegos",
+			"precio": 420,
+			"descripcion": "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+			"imagen": "img/1.webp"
+			
+		}
+	},
+	{
+		"model": "home.producto",
+		"pk" : 2,
+		"fields": {
+			"nombre": "smartphone",
+			"precio": 150,
+			"descripcion": "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+			"imagen": "img/2.webp"
+		}
+	},
+	{
+		"model": "home.producto",
+		"pk" : 3,
+		"fields": {
+			"nombre": "smart tv",
+			"precio": 160,
+			"descripcion": "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+			"imagen": "img/3.webp"
+
+		}
+	},
+	{
+		"model": "home.producto",
+		"pk" : 4,
+		"fields": {
+			"nombre": "laptop",
+			"precio": 300,
+			"descripcion": "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+			"imagen": "img/4.webp"
+
+		}
+	},
+	{
+		"model": "home.producto",
+		"pk" : 5,
+		"fields": {
+			"nombre": "silla gamer",
+			"precio": 109,
+			"descripcion": "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+			"imagen": "img/5.webp"
+
+		}
+	},
+	{
+		"model": "home.producto",
+		"pk" : 6,
+		"fields": {
+			"nombre": "auriculares",
+			"precio": 25,
+			"descripcion": "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+			"imagen": "img/6.webp"
+
+		}
+	},
+	{
+		"model": "home.producto",
+		"pk" : 7,
+		"fields": {
+			"nombre": "monitor",
+			"precio": 149,
+			"descripcion": "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+			"imagen": "img/7.webp"
+
+		}
+	},
+	{
+		"model": "home.producto",
+		"pk" : 8,
+		"fields": {
+			"nombre": "memoria usb",
+			"precio": 15,
+			"descripcion": "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+			"imagen": "img/8.webp"
+
+		}
+	},
+	{
+		"model": "home.producto",
+		"pk" : 9,
+		"fields": {
+			"nombre": "bocinas",
+			"precio": 35,
+			"descripcion": "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+			"imagen": "img/9.webp"
+
+		}
+	},
+	{
+		"model": "home.producto",
+		"pk" : 10,
+		"fields": {
+			"nombre": "router",
+			"precio": 50,
+			"descripcion": "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+			"imagen": "img/10.webp"
+
+		}
+	}
+]

@@ -1,0 +1,130 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% block title %} Inicio {% endblock title %}
+
+{% block content %}
+<div class="row g-5 m-2">
+    <div class="col-md-8">
+      	<h1 class="pb-4 mb-4 display-4 text-center text-body-emphasis fst-italic border-bottom">Catalago de productos</h1>
+
+      	<div>
+			{% if productos %}
+				<div class="mt-5"></div>
+				<div class="row  row-cols-1 row-cols-md-2 g-4" id="watch">
+					{% for producto in productos %}
+					 
+						<div class="col">
+				          	<div class="card">
+				          	{% if producto.imagen %}
+				          	 		<img src="{% static producto.imagen %}" class="card-img-top" width="100%" height="180">
+				          	 		{% else %}
+				          	 		<img src="{% static 'img/images.jpeg' %}" class="card-img-top" width="100%" height="180">
+				          	 	{% endif %} 	
+				          	
+					            <div class="card-body">
+					            	<h5 class="card-title">{{producto.nombre|title}}</h5>
+					            	<p class="card-text">{{producto.descripcion|truncatechars:50}}</p>
+					            	<small class="text-body-secondary">{{producto.precio|floatformat:2}} {{signo}}</small>
+					            	
+					            	<form method="POST" action="{% url 'home:add-carrito' producto_id=producto.id %}" class="text-center"> {% csrf_token %}
+													
+										<hr class="mt-2">
+
+										{% if request.user.is_authenticated %}
+											<button type="submit" class="btn btn-primary" id="add-car">Agregar al carrito</button>
+											{% else %}
+
+												<small class="text-body-secondary"> Para agregar al carrito debes ingresar al sistema.</small>
+										{% endif %}
+									</form>
+					            </div>
+				          	</div>
+			        	</div>
+		      		{% endfor %}
+				</div>		
+			{% endif %}
+		</div>
+
+    </div>
+
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        {% if carrito %}
+			<div class=" order-md-last">
+			        <h4 class="d-flex justify-content-between align-items-center mb-3">
+			        	<span class="text-primary">Mi carrito</span>
+			          	<span class="badge bg-primary rounded-pill" id="total-productos">0</span>
+			        </h4>
+			        <ul class="list-group mb-3" id="list-productos">
+			        	{% for producto in  carrito %}
+			        		<li class="list-group-item d-flex justify-content-between lh-sm">
+					            <div>
+					            	<h6 class="my-0">{{ producto.nombre }}</h6>
+						            <small class="text-body-secondary">Cantidad: {{ producto.total }}</small>
+
+					             	<div class="my-2"></div>
+					              	<div class="d-flex gap-2 justify-content-center">
+					              		<form method="POST" action="{% url 'home:add-carrito' producto_id=producto.id %}"> {% csrf_token %}
+												<button class="btn btn-sm-3 btn-outline-primary d-inline-fle-x align-items-center" type="submit">
+											    +
+											</button>
+										</form>
+										<form method="POST" action="{% url 'home:delete-carrito' producto_id=producto.id %}"> {% csrf_token %}
+												<button class="btn btn-sm-3 btn-outline-danger d-inline-flex align-items-center" type="submit">
+											    -
+												</button>
+										</form>			
+									</div>
+					            </div>
+					            <span class="text-body-secondary">{{producto.precio}}{{signo}}</span>
+					            
+				          	</li>
+
+			        	{% endfor %}
+			        </ul>
+			         <div class="d-flex gap-2 justify-content-center" id="event-car">
+			         	<form class="card p-2" method="POST" action="{% url 'home:vaciar-carrito' %}"> {% csrf_token %}
+				          <div class="input-group">
+				            <button type="submit" class="btn btn-outline-warning">Vaciar Carrito</button>
+				          </div>
+				        </form>
+				        <form class="card p-2" method="POST" action="{% url 'home:hacer-pedido' %}"> {% csrf_token %}
+				          <div class="input-group">
+				            <button type="submit" class="btn btn-outline-success">Realizar pedido</button>
+				          </div>
+				        </form>
+			         </div>
+		    </div>
+			
+	  
+	   		{% else %}
+
+			   <div class="order-md-last">
+			        <h4 class="d-flex justify-content-between align-items-center mb-3">
+			          <span class="text-primary">Mi carrito Vacio</span>
+			          <span class="badge bg-primary rounded-pill">0</span>
+			        </h4>
+			        <ul class="list-group mb-3">
+			        	<li class="list-group-item d-flex justify-content-between lh-sm">
+			        		<h6 class="my-0">Sin productos</h6>
+			        		<small class="text-body-secondary">0.0$</small>
+			        	</li>
+			        </ul>
+			    </div>
+
+		{% endif %}
+
+      </div>
+    </div>
+  </div>
+	
+
+{% endblock content %}
+
+	{% block script %}
+		{% include "includes/total_productos_en_carrito.html" %}
+
+	{% endblock script %}
+

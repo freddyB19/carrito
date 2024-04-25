@@ -1,0 +1,53 @@
+{% extends "base/base.html" %}
+
+{% load humanize %}
+
+{% block title %} Pedido {% endblock title %}
+
+{% block content %}
+
+	<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+		<h1 class="display-4 fw-normal text-body-emphasis">Detalle del Pedido</h1>
+		<p class="fs-5 text-body-secondary">
+			Pedido creado:  {{pedido.creado|date:"D d N Y P"}}  <br>
+			<small> {{pedido.creado|naturaltime}}</small>
+		</p>
+	</div>
+
+	<div class="container container-sm">
+		<div class="row row-cols-1 row-cols-2 row-cols-md-3 mb-3 text-center">
+			{% for dtpedido in detalle_pedido %}
+				<div class="col">
+			        <div class="card mb-4 rounded-3 shadow-sm border-primary">
+			          <div class="card-header py-3">
+			            <h4 class="my-0 fw-normal">Producto Comprado</h4>
+			          </div>
+			          <div class="card-body">
+			            <h1 class="card-title pricing-card-title">{{signo}}{{dtpedido.productos.precio}}</h1>
+			            <p>
+			            	
+			            </p>
+			            <ul class="list-unstyled mt-3 mb-4">
+			              <li>Producto: <span class="badge rounded-pill text-bg-info">{{dtpedido.productos}}</span></li>
+			             
+			              <li>
+			              	Cantidad comprada: <span class="badge bg-success-subtle border border-success-subtle text-success-emphasis rounded-pill">{{dtpedido.cantidad}}</span>
+			              </li>
+			            </ul>
+			          </div>
+			        </div>
+		      	</div>
+			{% endfor %}
+	    </div>
+	</div>
+	<div class="container my-5">
+	  	<div class="p-5 bg-body-tertiary rounded-3 text-center">
+			<h3 class="display-6 fw-normal text-body-emphasis">Para un total de: {{pedido.total}}{{signo}}</h3>
+		</div>
+	</div>
+
+	
+	
+
+
+{% endblock content %}

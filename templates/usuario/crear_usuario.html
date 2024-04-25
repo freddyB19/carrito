@@ -1,0 +1,55 @@
+{% extends "base/base.html" %}
+
+{% block title %} Crear Usuario{% endblock title %}
+
+{% block content %}
+	<div class="container mb-4">
+		<h1 class="display-5 text-center my-4">Crear usuario</h1>
+
+		<form method="POST" class="col-sm-5 col-lg-6 mx-auto"> {% csrf_token %}
+			{% if form.errors %}
+				{% if form.non_field_errors%}
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+
+				      	{% for error in form.non_field_errors %}
+				      		{{error}}
+				      	{% endfor %}
+						
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				{% endif %}
+	      		
+			{% endif %}
+			
+			{% for campo in form %}
+				<div class="row g-3">
+	      			<div class="col-12">
+	      				{{campo.label_tag}}
+	    				<div class="mb-2"></div>
+
+	      				{{campo}}
+
+	      				{% if campo.errors %}
+	      					{% for error in campo.errors %}
+	      						<div class="text-center">
+	      							<span class="badge bg-danger-subtle border border-danger-subtle text-danger-emphasis rounded-pill">{{error}}</span>
+	      						</div>
+	      						
+	      					{% endfor %}
+	
+						{% endif %}
+	      			</div>
+		    	</div>
+	    		
+	    		<div class="my-3"></div>
+
+			
+			{% endfor %}
+
+	         <hr class="my-4">
+			
+			<button type="submit" class="w-100 btn btn-primary btn-lg">Crear</button>
+		</form>
+	</div>
+	
+{% endblock content %}

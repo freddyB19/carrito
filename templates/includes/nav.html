@@ -1,0 +1,48 @@
+
+<nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+	<ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+		{% if not request.user.is_authenticated %}
+			{% if request.resolver_match.url_name != 'login' %}
+				<li>
+            <a href="{% url 'usuarios:login' %}" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
+              Entrar
+            </a>
+	      </li>
+      {% endif %}
+      {% if request.resolver_match.url_name != 'crear-usuario' %}
+      	<li>
+          <a href="{% url 'usuarios:crear-usuario' %}" class="nav-link text-white">
+            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people"/></svg>
+            Crear Usuario
+          </a>
+        </li>
+      {% endif %}
+
+		{% endif %}
+
+		{% if request.user.is_authenticated %}
+			<li>
+        <a href="{% url 'usuarios:config-usuario' pk=request.user.pk %}" class="nav-link {% if request.resolver_match.url_name == 'config-usuario'%}text-secondary {% else %}text-white{% endif %} ">
+          <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#gear-wide-connected"/></svg>
+          Configuraciones
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'usuarios:logout' %}" class="nav-link text-white">
+        	<svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#door-closed"/></svg>
+          Salir
+        </a>
+    </li>
+
+    <li>
+        <a href="{% url 'home:pedido-lista' usuario_id=request.user.id %}" class="nav-link {% if request.resolver_match.url_name == 'pedido-lista'%}text-secondary {% else %}text-white{% endif %}">
+          <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#file-earmark"/></svg>
+          Pedidos
+        </a>
+      </li>
+
+		{% endif %}
+    </ul>
+</nav>
