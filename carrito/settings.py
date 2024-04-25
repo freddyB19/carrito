@@ -100,7 +100,6 @@ DATABASES = {
 DATABASES = {
     'default': dj_database_url.config(
         default='postgres://carritodb_user:xsLxrE6dzT2LD4lw55HRt81SnHsaGlWO@dpg-colcnhud3nmc73cdfj50-a/carritodb',
-        conn_max_age=600
     )
 }
 
